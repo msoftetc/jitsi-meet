@@ -137,6 +137,7 @@
     "@react-native/metro-config": "0.73.5",
     "@types/amplitude-js": "8.16.5",
     "@types/audioworklet": "0.0.29",
+    "@types/axios": "^0.9.36",
     "@types/dom-screen-wake-lock": "1.0.1",
     "@types/js-md5": "0.4.3",
     "@types/lodash-es": "4.17.12",

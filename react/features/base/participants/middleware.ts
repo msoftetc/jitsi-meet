@@ -201,27 +201,52 @@ MiddlewareRegistry.register(store => next => action => {
 
             return result;
         }
+        // PREVIOUS_CODE
+        // case CONFERENCE_JOINED: {
+        //     const result = next(action);
 
+        //     const state = store.getState();
+        //     const { startSilent } = state['features/base/config'];
+
+        //     if (startSilent) {
+        //         const localId = getLocalParticipant(store.getState())?.id;
+
+        //         if (localId) {
+        //             store.dispatch(participantUpdated({
+        //                 id: localId,
+        //                 local: true,
+        //                 isSilent: startSilent
+        //             }));
+        //         }
+        //     }
+
+        //     return result;
+        // }
+
+        // ADDED_CODE_PART
         case CONFERENCE_JOINED: {
             const result = next(action);
 
-            const state = store.getState();
-            const { startSilent } = state['features/base/config'];
+            const { conference } = action;
+            const localParticipant = getLocalParticipant(store.getState());
 
-            if (startSilent) {
-                const localId = getLocalParticipant(store.getState())?.id;
+            if (conference && localParticipant && localParticipant.id) {
+                const localParticipantId = localParticipant.id;
+                const localJitsiParticipant = conference.getParticipantById(localParticipantId);
 
-                if (localId) {
+                if (localJitsiParticipant) {
+                    const role = localJitsiParticipant.getRole();
+
                     store.dispatch(participantUpdated({
-                        id: localId,
-                        local: true,
-                        isSilent: startSilent
+                        id: localParticipantId,
+                        role
                     }));
                 }
             }
 
             return result;
         }
+
 
 
         case SET_LOCAL_PARTICIPANT_RECORDING_STATUS: {
@@ -292,7 +317,7 @@ MiddlewareRegistry.register(store => next => action => {
                 const jitsiParticipant = conference.getParticipantById(id);
 
                 if (jitsiParticipant) {
-                    const role = jitsiParticipant.getRole(); // Returns 'moderator' or 'none'
+                    const role = jitsiParticipant.getRole();
 
                     store.dispatch(participantUpdated({
                         id,
