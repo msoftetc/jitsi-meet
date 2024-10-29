@@ -50,6 +50,7 @@
     "@xmldom/xmldom": "0.8.7",
     "abab": "2.0.6",
     "amplitude-js": "8.21.9",
+    "axios": "^1.7.7",
     "base64-js": "1.5.1",
     "bc-css-flags": "3.0.0",
     "clipboard-copy": "4.0.1",

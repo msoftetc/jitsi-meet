@@ -3,6 +3,9 @@ import React from 'react';
 import { WithTranslation } from 'react-i18next';
 import { connect as reactReduxConnect } from 'react-redux';
 
+//custom Imports
+import QuizPanel from '../../../quiz/components/QuizPanel';
+
 // @ts-expect-error
 import VideoLayout from '../../../../../modules/UI/videolayout/VideoLayout';
 import { IReduxState, IStore } from '../../../app/types';
@@ -283,6 +286,7 @@ class Conference extends AbstractConference<IProps, any> {
                 </div>
                 <ParticipantsPane />
                 <ReactionAnimations />
+                <QuizPanel />
             </div>
         );
     }
